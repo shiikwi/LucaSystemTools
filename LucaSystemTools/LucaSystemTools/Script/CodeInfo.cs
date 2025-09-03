@@ -18,8 +18,15 @@ namespace ProtScript.Entity
 
         public CodeInfo(int count)
         {
-            this.count = count;
-            data = null;
+            if(count < 3)
+            {
+                this.count = count;
+            }
+            else if(count == 3)
+            {
+                this.count = 2;
+            }
+                data = null;
         }
         public byte[] ToBytes(int version = 3)
         {

@@ -220,6 +220,7 @@ CL             《Clannad》Nintendo Switch
 TAWL           《Tomoyo After Its a Wonderful Life CS Edition》Nintendo Switch
 FLOWERS        《Flowers - Shiki》
 ISALND         《ISLAND》Psvita
+SummerPocketsRB《SummerPocketsRB》Steam
 
 CUSTOM          Read custom Opcode file. Path: OPCODE/{CUSTOM}.txt
 ");

@@ -68,7 +68,7 @@ namespace OpcodeGuide
 
             typeTip.Add(DataType.LenStringUnicode, "有长度Unicode编码的字符串\n长度：字符串前UInt16数据");
             typeTip.Add(DataType.LenStringSJIS, "有长度日文Shift-JIS编码的字符串\n长度：字符串前UInt16数据");
-            typeTip.Add(DataType.LenStringUTF8, "[未定义]有长度UTF-8编码的字符串\n长度：未定义");
+            typeTip.Add(DataType.LenStringUTF8, "有长度UTF-8编码的字符串\n长度：字符串前UInt16数据绝对值");
             typeTip.Add(DataType.LenStringCustom, "有长度自定义编码的字符串\n长度：字符串前UInt16数据\n说明：通常为替换的Shift-JIS编码");
 
 

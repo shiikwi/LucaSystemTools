@@ -50,10 +50,10 @@ namespace ProtScript
         public void ReadScript()
         {
             fs.Seek(0, SeekOrigin.Begin);
-            while (fs.Position < fs.Length)
-            {
-                script.lines.Add(ReadCodeLine());
-            }
+                while (fs.Position < fs.Length)
+                {
+                    script.lines.Add(ReadCodeLine());
+                }
             FixGotoPosition();
             if (Program.debug)
             {
@@ -189,7 +189,7 @@ namespace ProtScript
                 codeOffset++;
                 infoCount = info.count;
                 // END指令info.count需要减一
-                if (code.opcode == "END")
+                if (code.opcode == "END" && infoCount > 0)
                 {
                     infoCount--;
                 }
@@ -443,15 +443,45 @@ namespace ProtScript
                             nullableSkip = true;
                             break;
                         }
-                        int len = br.ReadUInt16();
+                        var orginalPos = fs.Position;
+                        int checklen = br.ReadUInt16();
+                        fs.Seek(orginalPos, SeekOrigin.Begin);
+                        if((checklen * 2) + 2 > (codeLength - codeOffset))
+                        {
+                            //Just Use For Export
+                            var Uintdata = br.ReadUInt16().ToString();
+                            datas.Add(new ParamData(type, Uintdata, Uintdata));
+                            break;
+                        }
                         if (type == DataType.LenStringUnicode)
                         {
+                            int len = br.ReadUInt16();
                             dataStr = Encoding.Unicode.GetString(br.ReadBytes(len * 2));
                         }
                         else if (type == DataType.LenStringSJIS)
                         {
+                            int len = br.ReadUInt16();
                             dataStr = Encoding.GetEncoding("Shift-Jis").GetString(br.ReadBytes(len * 2));
                         }
+                        datas.Add(new ParamData(type, dataStr, dataStr));
+                        break;
+                    case DataType.LenStringUTF8:
+                        if (value.nullable && codeOffset + 2 > codeLength)
+                        {
+                            nullableSkip = true;
+                            break;
+                        }
+                        short readLen = br.ReadInt16();
+                        int actualLen = 0;
+                        if(readLen < 0)
+                        {
+                            actualLen = Math.Abs(readLen);
+                        }
+                        else
+                        {
+                            actualLen = readLen;
+                        }
+                        dataStr = Encoding.UTF8.GetString(br.ReadBytes(actualLen));
                         datas.Add(new ParamData(type, dataStr, dataStr));
                         break;
                     default:
@@ -462,7 +492,6 @@ namespace ProtScript
                 {
                     throw new Exception("opcode参数数量错误！ ");
                 }
-
             }
             return datas;
         }

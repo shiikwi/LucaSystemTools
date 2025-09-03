@@ -30,6 +30,7 @@ namespace ProtScript
         CL,
         TAWL,
         FLOWERS,
+        SummerPocketsRB,
         CUSTOM,
     }
 
