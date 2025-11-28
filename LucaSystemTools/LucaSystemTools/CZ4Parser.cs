@@ -15,12 +15,7 @@ namespace ProtImage
 //注：部分代码有参考现存代码，来源忘了 2020.5.24
     public class CZ4Parser: CZParserBase
     {
-        private ushort? SpecialBlock = null;
-        public CZ4Parser(ushort colorblock)
-        {
-            SpecialBlock = colorblock;
-        }
-        public CZ4Parser() { }
+        private const ushort Block = 3;
 
         //作者：Wetor, Devseed
         //时间：2020.9.8
@@ -55,10 +50,10 @@ namespace ProtImage
                 Buffer.BlockCopy(data, pcount * 3, data2, 0, pcount);
 
                 int PixelByteCount = 3;
-                ImageFillPartten.LineDiffPattern(ref Picture, (ushort)(SpecialBlock == null ? Header.Colorblock : SpecialBlock), PixelByteCount, data,null);
+                ImageFillPartten.LineDiffPattern(ref Picture, Block, PixelByteCount, data,null);
 
                 PixelByteCount = 1;
-                ImageFillPartten.LineDiffPattern(ref Picture, (ushort)(SpecialBlock == null ? Header.Colorblock : SpecialBlock), PixelByteCount, data2,
+                ImageFillPartten.LineDiffPattern(ref Picture, Block, PixelByteCount, data2,
                     delegate (int x, int y, byte[] curr_line)
                     {
                         var pixel = Picture.GetPixel(x, y);

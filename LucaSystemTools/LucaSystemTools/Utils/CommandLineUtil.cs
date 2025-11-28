@@ -96,9 +96,6 @@ namespace LucaSystem.Utils
                     case "cz4":
                         selclass = new CZ4Parser();
                         break;
-                    case "steamsprbcz4":
-                        selclass = new CZ4Parser(3);
-                        break;
                     case "dat":
                         selclass = new DatParser();
                         break;

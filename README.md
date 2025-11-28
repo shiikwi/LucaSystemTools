@@ -69,7 +69,7 @@ NS两款游戏脚本相关，看代码就行了~
 ## 使用说明
 ```
 Options:
-  -t|--file-type <FILE_TYPE>                    FileType [cz0] [cz1] [cz3] [cz4] [steamsprbcz4] [dat] [pak] [psb] [info] [scr]
+  -t|--file-type <FILE_TYPE>                    FileType [cz0] [cz1] [cz3] [cz4] [dat] [pak] [psb] [info] [scr]
   -m|--parser-mode <PARSER_MODE>                ParserMode [import] or [export]
   -f|--file-name <FILE_NAME>                    FileName or FolderName
   -o|--out-file-name <OUT_FILE_NAME>            OutFileName or OutFolderName
